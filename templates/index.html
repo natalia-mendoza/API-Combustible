@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm border-primary">
+            <div class="card-header py-3 text-white bg-primary border-primary">
+              <h4 class="my-0 fw-normal">Filtrar Datos</h4>
+            </div>
+            <div class="card card-body">
+              <form action="/" method="POST">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="fullname" placeholder="filtro" >
+                </div>
+                <select name="comp_select" class="form-select" aria-label="Default select example" id= "comp_select">
+                  <option selected>Seleccione el campo a buscar</option>
+                  <option value="MODELYEAR">MODELYEAR</option>
+                  <option value="MAKE">MAKE</option>
+                  <option value="MODEL">MODEL</option>
+                  <option value="VEHICLECLASS">VEHICLECLASS</option>
+                  <option value="ENGINESIZE">ENGINESIZE</option>
+                  <option value="CYLINDERS">CYLINDERS</option>
+                  <option value="TRANSMISSION">TRANSMISSION</option>
+                  <option value="FUELTYPE">FUELTYPE</option>
+                  <option value="FUELCONSUMPTION_CITY">FUELCONSUMPTION_CITY</option>
+                  <option value="FUELCONSUMPTION_HWY">FUELCONSUMPTION_HWY</option>
+                  <option value="FUELCONSUMPTION_COMB">FUELCONSUMPTION_COMB</option>
+                  <option value="FUELCONSUMPTION_COMB_MPG">FUELCONSUMPTION_COMB_MPG</option>
+                  <option value="CO2EMISSIONS">CO2EMISSIONS</option>  
+                   </select>
+                   <button class="btn btn-primary btn-block">
+                    Consultar
+                  </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+    
+       
+        <div class="col-md-7">
+        </div>
+    
+        <div class="col">
+          <div class="card mb-4 rounded-2 shadow-sm border-primary">
+            <div class="card-header py-3 text-white bg-primary border-primary">
+              <h4 class="my-0 fw-normal">Datos Regresión Lineal</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">{{regre["training"]}}<small class="text-muted fw-light"> Training</small></h1>
+              <h1 class="card-title pricing-card-title">{{regre["test"]}}<small class="text-muted fw-light"> Test</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Coeficiente de correlación -: {{regre["coef"]}}</li>
+                <li>Intercepto ------------------: {{regre["inter"]}}</li>
+                <li>Error Absoluto -------------: {{regre["mean_absolute_error"]}}</li>
+                <li>Error Cuadratico -----------: {{regre["mean_squared_error"]}}</li>
+                <li>Error ------------------------: {{regre["root_mean_squared_error"]}}</li>
+              </ul>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            This week
+          </button>
+        </div>
+      </div>
+
+      <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="625" height="263" style="display: block; width: 625px; height: 263px;"></canvas>
+
+      <h2>Section title</h2>
+      <div class="col-md-5">
+        <table class="table table-striped table-hover table-bordered table-sm bg-white">
+          <thead>
+            <tr>
+              <td>MODELYEAR</td>
+              <td>MAKE</td>
+              <td>MODEL</td>
+              <td>VEHICLECLASS</td>
+              <td>ENGINESIZE</td>
+              <td>CYLINDERS</td>
+              <td>TRANSMISSION</td>
+              <td>FUELTYPE</td>
+              <td>FUELCONSUMPTION_CITY</td>
+              <td>FUELCONSUMPTION_HWY</td>
+              <td>FUELCONSUMPTION_COMB</td>
+              <td>FUELCONSUMPTION_COMB_MPG</td>
+              <td>CO2EMISSIONS</td>
+            </tr>
+          </thead>
+  
+          <tbody>
+            {% for contact in contacts %}
+            <tr>
+              <td>{{contact.0}}</td>
+              <td>{{contact.1}}</td>
+              <td>{{contact.2}}</td>
+              <td>{{contact.3}}</td>
+              <td>{{contact.4}}</td>
+              <td>{{contact.5}}</td>
+              <td>{{contact.6}}</td>
+              <td>{{contact.7}}</td>
+              <td>{{contact.8}}</td>
+              <td>{{contact.9}}</td>
+              <td>{{contact.10}}</td>
+              <td>{{contact.11}}</td>
+              <td>{{contact.12}}</td>
+              <td>{{contact.13}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+
+
+
+<div class="row">
+  <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    
+
+    
+
+
+    
+  </div>
+</div>
+{% endblock %}
