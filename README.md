@@ -33,25 +33,4 @@ El objetivo de este proyecto es tener una base de desarrollo analitico para su p
   > flask run
   >
 
-## Versión (Python 3.7)
 
-#### 1.0.0
-
-Funcionalidad: Base Calendarizable
-
-## Contribuidor(es)
-
-* #### 1. Andrés Henao Restrepo
-
-  _rol:_ Contribuidor
-  _usuario de Red:_  andres callejas
-  _correo:_ ancallej@bancolombia.com.co
-
-## Librerias:
-
-'orquestador',
-'sparky-bc',
-'openpyxl',
-'apscheduler',
-'sklearn',
-'pyodbc'
