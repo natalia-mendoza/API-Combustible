@@ -1,6 +1,6 @@
 ## Introducción
 
-El objetivo de este proyecto es tener una base de desarrollo analitico para su posterior puesta en produccion.
+El objetivo de este proyecto es dar solucion a los problemas planteados
 
 #### Instalación :
 
